@@ -1,0 +1,237 @@
+/* assets/css/main.css */
+
+:root {
+  /* باليتة الألوان الخاصة بك */
+  --primary-color: #213428; /* الأخضر الداكن العميق */
+  --accent-color: #4e7c32; /* الأخضر العشبي للتأثيرات */
+  --black: #000000; /* للنصوص شديدة الوضوح */
+  --bg-light: #e6ede8; /* الخلفية المائلة للخضرة الباهتة */
+  --white: #ffffff; /* لون البطاقات والخلفيات الصافية */
+
+  /* تأثيرات الظلال - Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(33, 52, 40, 0.1);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+
+  /* سرعة الحركة - Transitions */
+  --transition-fast: 0.2s ease-in-out;
+  --transition-standard: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* Extra Light */
+@font-face {
+  font-family: "Cairo";
+  src: url("../fonts/Cairo-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Light */
+@font-face {
+  font-family: "Cairo";
+  src: url("../fonts/Cairo-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Regular */
+@font-face {
+  font-family: "Cairo";
+  src: url("../fonts/Cairo-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Medium */
+@font-face {
+  font-family: "Cairo";
+  src: url("../fonts/Cairo-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* SemiBold */
+@font-face {
+  font-family: "Cairo";
+  src: url("../fonts/Cairo-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Bold */
+@font-face {
+  font-family: "Cairo";
+  src: url("../fonts/Cairo-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Extra Bold */
+@font-face {
+  font-family: "Cairo";
+  src: url("../fonts/Cairo-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Black */
+@font-face {
+  font-family: "Cairo";
+  src: url("../fonts/Cairo-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+* {
+  box-sizing: border-box;
+  font-family: "Cairo", sans-serif;
+  padding: 0;
+  margin: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+/* الإعدادات العامة */
+body {
+  background-color: var(--bg-light);
+  color: var(--black);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  direction: rtl; /* ليتناسب مع صور الموقع العربية */
+  min-height: 1000px;
+}
+
+/* تأثيرات عامة على العناصر */
+
+/* الأزرار - Buttons */
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--white);
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-standard);
+  box-shadow: var(--shadow-sm);
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background-color: var(--black);
+  transform: translateY(-2px); /* رفعة خفيفة عند التحويم */
+  box-shadow: var(--shadow-md);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* الصور - Images */
+img {
+  max-width: 100%;
+  height: auto;
+  transition: var(--transition-standard);
+}
+
+/* تأثير الـ Overlay الخفيف على الصور عند التحويم */
+.img-hover-zoom {
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.img-hover-zoom img:hover {
+  transform: scale(1.05);
+}
+
+/* الحقول - Inputs */
+input,
+textarea {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px;
+  transition: var(--transition-fast);
+  outline: none;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(33, 52, 40, 0.1);
+}
+
+/* الروابط - Links */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition-fast);
+}
+
+a:hover {
+  color: var(--accent-color);
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--bg-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+}
+
+/* _________________ */
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 850px) {
+  .container {
+    width: 830px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1180px;
+  }
+}
+@media (min-width: 1250px) {
+  .container {
+    width: 1230px;
+  }
+}
+@media (min-width: 1300px) {
+  .container {
+    width: 1280px;
+  }
+}
+@media (min-width: 1400px) {
+  .container {
+    width: 1340px;
+  }
+}
+@media (min-width: 1500px) {
+  .container {
+    width: 1400px;
+  }
+}
