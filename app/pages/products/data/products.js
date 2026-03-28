@@ -29,9 +29,9 @@ export const allProducts = {
 
   "agricultural-gypsum": {
     title: "الجبس الزراعي الفعّال",
-    price: "120 ج.م",
-    oldPrice: "160 ج.م",
-    discount: 25,
+    price: "850 ج.م",
+    oldPrice: "900 ج.م",
+    discount: 50,
     sku: "ALN-G002",
     excerpt:
       "مُحسّن تربة طبيعي غني بالكالسيوم والكبريت، يعالج ملوحة وقلوية التربة.",
@@ -56,10 +56,10 @@ export const allProducts = {
   },
 
   "compost-liquid": {
-    title: "الكمبوست السائل النانوي",
-    price: "210 ج.م",
-    oldPrice: "260 ج.م",
-    discount: 19,
+    title: "الكمبوست السائل",
+    price: "400ج.م",
+    oldPrice: "350 ج.م",
+    discount: 50,
     sku: "ALN-L003",
     excerpt:
       "تغذية سريعة وامتصاص فوري عن طريق الأوراق والجذور، يحسن مقاومة النبات.",

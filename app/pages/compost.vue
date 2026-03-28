@@ -162,7 +162,7 @@
               <li><Check :size="16" /> مثالي للتربة الرملية</li>
               <li><Check :size="16" /> يطلق المغذيات ببطء</li>
             </ul>
-            <NuxtLink to="/products/powder" class="btn-type">
+            <NuxtLink to="/products/compost-powder" class="btn-type">
               تفاصيل المنتج
             </NuxtLink>
           </div>
@@ -188,7 +188,7 @@
               <li><Check :size="16" /> سهل الخلط مع أنظمة الري</li>
               <li><Check :size="16" /> يعزز مقاومة النبات للإجهاد</li>
             </ul>
-            <NuxtLink to="/products/liquid" class="btn-type">
+            <NuxtLink to="/products/compost-liquid" class="btn-type">
               تفاصيل المنتج
             </NuxtLink>
           </div>
@@ -214,7 +214,7 @@
               <li><Check :size="16" /> يوفر الكالسيوم والكبريت</li>
               <li><Check :size="16" /> يعزز فعالية الأسمدة الأخرى</li>
             </ul>
-            <NuxtLink to="/products/gypsum" class="btn-type">
+            <NuxtLink to="/products/agricultural-gypsum" class="btn-type">
               تفاصيل المنتج
             </NuxtLink>
           </div>
