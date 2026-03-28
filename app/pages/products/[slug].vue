@@ -1,173 +1,191 @@
 <template>
   <article class="product-page">
-    <nav class="breadcrumb-nav container">
-      <NuxtLink to="/">الرئيسية</NuxtLink>
-      <ChevronLeft :size="14" />
-      <NuxtLink to="/products">المنتجات</NuxtLink>
-      <ChevronLeft :size="14" />
-      <span class="current">{{ product?.title }}</span>
-    </nav>
+    <div v-if="product">
+      <nav class="breadcrumb-nav container">
+        <NuxtLink to="/">الرئيسية</NuxtLink>
+        <ClientOnly><ChevronLeft :size="14" /></ClientOnly>
+        <NuxtLink to="/products">المنتجات</NuxtLink>
+        <ClientOnly><ChevronLeft :size="14" /></ClientOnly>
+        <span class="current">{{ product.title }}</span>
+      </nav>
 
-    <div class="container main-layout">
-      <section class="gallery-section">
-        <div class="sticky-gallery">
-          <Swiper
-            :modules="[SwiperThumbs, SwiperZoom, SwiperNavigation]"
-            :thumbs="{ swiper: thumbsSwiperInstance }"
-            :zoom="true"
-            :navigation="{ nextEl: '.nav-next', prevEl: '.nav-prev' }"
-            class="main-slider"
-          >
-            <SwiperSlide v-for="(img, i) in productImages" :key="i">
-              <div class="swiper-zoom-container">
-                <NuxtImg :src="img" :alt="product?.title" class="hero-image" />
-              </div>
-            </SwiperSlide>
+      <div class="container main-layout">
+        <section class="gallery-section">
+          <div class="sticky-gallery">
+            <Swiper
+              :modules="[SwiperThumbs, SwiperZoom, SwiperNavigation]"
+              :thumbs="{ swiper: thumbsSwiperInstance }"
+              :zoom="true"
+              :navigation="{ nextEl: '.nav-next', prevEl: '.nav-prev' }"
+              class="main-slider"
+            >
+              <SwiperSlide v-for="(img, i) in productImages" :key="i">
+                <div class="swiper-zoom-container">
+                  <NuxtImg :src="img" :alt="product.title" class="hero-image" />
+                </div>
+              </SwiperSlide>
 
-            <div class="custom-nav">
-              <button class="nav-btn nav-prev"><ChevronRight /></button>
-              <button class="nav-btn nav-next"><ChevronLeft /></button>
-            </div>
-
-            <div class="product-tag" v-if="product?.badge">
-              {{ product.badge }}
-            </div>
-          </Swiper>
-
-          <Swiper
-            @swiper="onThumbsSwiperReady"
-            :slides-per-view="4"
-            :space-between="12"
-            class="thumbs-slider"
-          >
-            <SwiperSlide v-for="(img, i) in productImages" :key="i">
-              <div class="thumb-card">
-                <NuxtImg :src="img" />
-              </div>
-            </SwiperSlide>
-          </Swiper>
-        </div>
-      </section>
-
-      <section class="details-section">
-        <div class="header-meta">
-          <span class="category-tag">{{ product?.categoryName }}</span>
-          <div class="rating-box">
-            <Star
-              v-for="s in 5"
-              :key="s"
-              :size="16"
-              :fill="s <= 4 ? '#f1c40f' : 'none'"
-              color="#f1c40f"
-            />
-            <span>(4.8)</span>
-          </div>
-        </div>
-
-        <h1 class="title">{{ product?.title }}</h1>
-        <p class="sku">
-          كود المنتج: <span>{{ product?.sku }}</span>
-        </p>
-
-        <div class="price-card">
-          <div class="price-row">
-            <span class="main-price">{{ product?.price }}</span>
-            <span class="old-price" v-if="product?.oldPrice">{{
-              product.oldPrice
-            }}</span>
-          </div>
-          <div class="save-tag" v-if="product?.discount">
-            وفرت {{ product.discount }}%
-          </div>
-        </div>
-
-        <p class="description">{{ product?.excerpt }}</p>
-
-        <div class="features-grid">
-          <div class="feature-item">
-            <div class="icon-wrap"><ShieldCheck /></div>
-            <span>جودة معتمدة</span>
-          </div>
-          <div class="feature-item">
-            <div class="icon-wrap"><Truck /></div>
-            <span>شحن سريع</span>
-          </div>
-        </div>
-
-        <div class="booking-card">
-          <div class="qnt-section">
-            <div class="qnt-header">
-              <span class="qnt-label">الكمية المطلوبة</span>
-              <span class="stock-status">متوفر في المخزن</span>
-            </div>
-
-            <div class="qnt-ctrl-modern">
-              <button
-                class="ctrl-btn minus"
-                @click="quantity > 1 && quantity--"
-                :disabled="quantity <= 1"
-              >
-                <span>−</span>
-              </button>
-
-              <div class="input-wrapper">
-                <input type="number" v-model="quantity" readonly />
-                <span class="unit">قطعة</span>
+              <div class="custom-nav">
+                <button class="nav-btn nav-prev">
+                  <ClientOnly><ChevronRight /></ClientOnly>
+                </button>
+                <button class="nav-btn nav-next">
+                  <ClientOnly><ChevronLeft /></ClientOnly>
+                </button>
               </div>
 
-              <button class="ctrl-btn plus" @click="quantity++">
-                <span>+</span>
-              </button>
+              <div class="product-tag" v-if="product.badge">
+                {{ product.badge }}
+              </div>
+            </Swiper>
+
+            <Swiper
+              @swiper="onThumbsSwiperReady"
+              :slides-per-view="4"
+              :space-between="12"
+              class="thumbs-slider"
+            >
+              <SwiperSlide v-for="(img, i) in productImages" :key="i">
+                <div class="thumb-card">
+                  <NuxtImg :src="img" />
+                </div>
+              </SwiperSlide>
+            </Swiper>
+          </div>
+        </section>
+
+        <section class="details-section">
+          <div class="header-meta">
+            <span class="category-tag">{{ product.categoryName }}</span>
+            <div class="rating-box">
+              <ClientOnly>
+                <Star
+                  v-for="s in 5"
+                  :key="s"
+                  :size="16"
+                  :fill="s <= 4 ? '#f1c40f' : 'none'"
+                  color="#f1c40f"
+                />
+              </ClientOnly>
+              <span>(4.8)</span>
             </div>
           </div>
 
-          <div class="btns-group-modern">
-            <a :href="whatsappUrl" target="_blank" class="btn-whatsapp-order">
-              <div class="icon-circle">
-                <MessageCircle :size="22" />
+          <h1 class="title">{{ product.title }}</h1>
+          <p class="sku">
+            كود المنتج: <span>{{ product.sku }}</span>
+          </p>
+          <section class="details-section">
+            <div class="description-wrapper">
+              <h3 class="section-subtitle">عن المنتج:</h3>
+              <div class="full-description">
+                {{ product.description || product.excerpt }}
               </div>
-              <div class="btn-text">
-                <span class="top-txt">إتمام الطلب سريعاً</span>
-                <span class="main-txt">اطلب عبر واتساب</span>
-              </div>
-            </a>
+            </div>
+          </section>
+          <div class="price-card">
+            <div class="price-row">
+              <span class="main-price">{{ product.price }}</span>
+              <span class="old-price" v-if="product.oldPrice">{{
+                product.oldPrice
+              }}</span>
+            </div>
+            <div class="save-tag" v-if="product.discount">
+              وفرت {{ product.discount }}%
+            </div>
           </div>
-        </div>
-        <div class="share-section">
-          <span class="share-label">مشاركة عبر:</span>
-          <div class="social-links">
-            <a href="#" class="social-icon fb" title="فيسبوك"
-              ><Facebook :size="18"
-            /></a>
-            <a href="#" class="social-icon wa" title="واتساب"
-              ><MessageCircle :size="18"
-            /></a>
-            <a href="#" class="social-icon tw" title="تويتر"
-              ><Twitter :size="18"
-            /></a>
-            <a
-              href="#"
-              class="social-icon link"
-              @click.prevent="copyLink"
-              title="نسخ الرابط"
-              ><LinkIcon :size="18"
-            /></a>
-          </div>
-        </div>
 
-        <div class="trust-footer">
-          <div class="trust-node"><Package :size="18" /> تغليف آمن</div>
-          <div class="trust-node">
-            <RotateCcw :size="18" /> إرجاع خلال 14 يوم
+          <p class="description">{{ product.excerpt }}</p>
+
+          <div class="features-grid">
+            <div class="feature-item">
+              <div class="icon-wrap">
+                <ClientOnly><ShieldCheck /></ClientOnly>
+              </div>
+              <span>جودة معتمدة</span>
+            </div>
+            <div class="feature-item">
+              <div class="icon-wrap">
+                <ClientOnly><Truck /></ClientOnly>
+              </div>
+              <span>شحن سريع</span>
+            </div>
           </div>
-        </div>
-      </section>
+
+          <div class="booking-card">
+            <div class="qnt-section">
+              <div class="qnt-header">
+                <span class="qnt-label">الكمية المطلوبة</span>
+                <span class="stock-status">متوفر في المخزن</span>
+              </div>
+              <div class="qnt-ctrl-modern">
+                <button
+                  class="ctrl-btn minus"
+                  @click="quantity > 1 && quantity--"
+                  :disabled="quantity <= 1"
+                >
+                  <span>−</span>
+                </button>
+                <div class="input-wrapper">
+                  <input type="number" v-model="quantity" readonly />
+                  <span class="unit">قطعة</span>
+                </div>
+                <button class="ctrl-btn plus" @click="quantity++">
+                  <span>+</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="btns-group-modern">
+              <a :href="whatsappUrl" target="_blank" class="btn-whatsapp-order">
+                <div class="icon-circle">
+                  <ClientOnly><MessageCircle :size="22" /></ClientOnly>
+                </div>
+                <div class="btn-text">
+                  <span class="top-txt">إتمام الطلب سريعاً</span>
+                  <span class="main-txt">اطلب عبر واتساب</span>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="share-section">
+            <span class="share-label">مشاركة عبر:</span>
+            <div class="social-links">
+              <ClientOnly>
+                <a href="#" class="social-icon fb"><Facebook :size="18" /></a>
+                <a href="#" class="social-icon wa"
+                  ><MessageCircle :size="18"
+                /></a>
+                <a href="#" class="social-icon tw"><Twitter :size="18" /></a>
+                <a href="#" class="social-icon link" @click.prevent="copyLink"
+                  ><LinkIcon :size="18"
+                /></a>
+              </ClientOnly>
+            </div>
+          </div>
+
+          <div class="trust-footer">
+            <div class="trust-node">
+              <ClientOnly><Package :size="18" /></ClientOnly> تغليف آمن
+            </div>
+            <div class="trust-node">
+              <ClientOnly><RotateCcw :size="18" /></ClientOnly> إرجاع خلال 14
+              يوم
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
   </article>
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from "vue"; // أضفنا computed هنا
+import { ref, onMounted, computed, watch } from "vue";
+import { useRoute } from "vue-router";
+// --- استيراد البيانات من الملف الخارجي ---
+import { allProducts } from "@/pages/products/data/products";
+
 import { Swiper, SwiperSlide } from "swiper/vue";
 import {
   Thumbs as SwiperThumbs,
@@ -178,28 +196,24 @@ import {
   ChevronLeft,
   ChevronRight,
   Star,
-  ShoppingCart,
-  Heart,
   ShieldCheck,
   Truck,
   Package,
   RotateCcw,
-  Zap,
   Facebook,
   MessageCircle,
   Twitter,
   Link as LinkIcon,
 } from "lucide-vue-next";
 
-// Swiper Essential Styles
+// Swiper styles
 import "swiper/css";
 import "swiper/css/thumbs";
 import "swiper/css/zoom";
 import "swiper/css/navigation";
 
+const route = useRoute();
 const quantity = ref(1);
-const isFav = ref(false);
-const loading = ref(true);
 const thumbsSwiperInstance = ref(null);
 const product = ref(null);
 const productImages = ref([]);
@@ -208,39 +222,42 @@ const onThumbsSwiperReady = (swiper) => {
   thumbsSwiperInstance.value = swiper;
 };
 
-// الجزء المضاف: رابط الواتساب الذكي
+const loadProduct = () => {
+  const slug = route.params.slug;
+  const selected = allProducts[slug];
+
+  if (selected) {
+    product.value = selected;
+    productImages.value = selected.images;
+  } else {
+    // اختياري: توجيه المستخدم لصفحة 404 إذا لم يجد المنتج
+    // throw createError({ statusCode: 404, statusMessage: 'Product Not Found' })
+    product.value = allProducts["compost-powder"];
+    productImages.value = allProducts["compost-powder"].images;
+  }
+};
+
+onMounted(() => {
+  loadProduct();
+});
+
+watch(
+  () => route.params.slug,
+  () => {
+    loadProduct();
+    quantity.value = 1; // إعادة تعيين الكمية عند تغيير المنتج
+  },
+);
+
 const whatsappUrl = computed(() => {
   const phone = "201110022133";
-  const message = `السلام عليكم، أريد طلب المنتج التالي:%0A- الاسم: ${product.value?.title}%0A- الكمية: ${quantity.value}%0A- الكود: ${product.value?.sku}`;
+  const message = `طلب منتج: ${product.value?.title}%0Aالكمية: ${quantity.value}%0Aالكود: ${product.value?.sku}`;
   return `https://wa.me/${phone}?text=${message}`;
 });
 
-onMounted(async () => {
-  // Mock Data - استبدلها لاحقاً ببيانات الـ API
-  product.value = {
-    title: "كمبوست بودر عضوي فاخر",
-    price: "150 ج.م",
-    oldPrice: "190 ج.م",
-    discount: 20,
-    sku: "ALN-0092",
-    excerpt:
-      "سماد طبيعي 100% مستخلص من أجود المواد العضوية، يعمل على إحياء التربة المجهدة وزيادة كفاءة امتصاص الجذور للمغذيات بفاعلية فورية.",
-    categoryName: "محسنات التربة الزراعية",
-    badge: "الأكثر طلباً",
-  };
-  productImages.value = [
-    "https://images.unsplash.com/photo-1628352081506-83c43123ed6d?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1585314062340-f1a5a7c9328d?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1615485290382-441e4d019cb5?auto=format&fit=crop&w=800&q=80",
-  ];
-  loading.value = false;
-});
-
-const addToCart = () => console.log("Added to Cart");
-const buyNow = () => console.log("Directing to Checkout...");
 const copyLink = () => {
   navigator.clipboard.writeText(window.location.href);
-  alert("تم نسخ الرابط بنجاح!");
+  alert("تم نسخ الرابط!");
 };
 </script>
 <style scoped>
@@ -253,7 +270,37 @@ const copyLink = () => {
   --radius: 16px;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+/* تنسيقات الوصف الجديد */
+.description-wrapper {
+  margin-top: 10px;
+}
 
+.section-subtitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 12px;
+  border-right: 4px solid var(--primary);
+  padding-right: 12px;
+}
+
+.full-description {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #4a5568;
+  /* السحر هنا: هذا السطر يحافظ على نزول الأسطر والمسافات */
+  white-space: pre-line;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px dashed #e2e8f0;
+}
+
+/* تحسين شكل الرموز التعبيرية (Emojis) */
+.full-description span {
+  display: inline-block;
+  margin-left: 5px;
+}
 .product-page {
   background: var(--bg-light);
   min-height: 100vh;

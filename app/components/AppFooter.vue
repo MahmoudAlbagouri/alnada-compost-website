@@ -42,75 +42,75 @@ import { Facebook, Instagram, MessageCircle } from "lucide-vue-next";
 </script>
 
 <style scoped>
-.main-footer {
-  /* خلفية العشب */
-  background-image: url("/images/grass1.png");
+.main-footer[data-v-a11a4c1f] {
+  background-image: url(/images/grass1.png);
   background-size: cover;
   background-position: center;
   position: relative;
   color: #ffffff;
-
-  /* زيادة الـ Padding العلوي لأن الزجزاج سيقص جزءاً من الأعلى */
   padding: 120px 0 60px 0;
   direction: rtl;
 
-  /* تأثير الزجزاج (العشب) - نقاط عشوائية لتعطي مظهر غير منتظم */
-  -webkit-clip-path: polygon(
-    0% 20%,
-    3% 5%,
-    7% 18%,
-    11% 0%,
-    15% 22%,
-    20% 8%,
-    24% 19%,
-    28% 2%,
-    33% 25%,
-    38% 6%,
-    42% 18%,
-    47% 0%,
-    52% 21%,
-    56% 5%,
-    60% 17%,
-    65% 2%,
-    70% 24%,
-    75% 7%,
-    80% 19%,
-    85% 0%,
-    90% 22%,
-    95% 4%,
-    100% 18%,
-    100% 100%,
-    0% 100%
-  );
+  /* تم تضييق المسافات إلى حوالي 30-40px مع تغيير الارتفاعات عشوائياً بين 0px و 50px */
   clip-path: polygon(
-    0% 20%,
-    3% 5%,
-    7% 18%,
-    11% 0%,
-    15% 22%,
-    20% 8%,
-    24% 19%,
-    28% 2%,
-    33% 25%,
-    38% 6%,
-    42% 18%,
-    47% 0%,
-    52% 21%,
-    56% 5%,
-    60% 17%,
-    65% 2%,
-    70% 24%,
-    75% 7%,
-    80% 19%,
-    85% 0%,
-    90% 22%,
-    95% 4%,
-    100% 18%,
-    100% 100%,
-    0% 100%
+    0px 45px,
+    30px 15px,
+    55px 38px,
+    85px 5px,
+    120px 42px,
+    155px 12px,
+    190px 35px,
+    220px 0px,
+    255px 44px,
+    290px 18px,
+    325px 40px,
+    360px 2px,
+    400px 48px,
+    435px 10px,
+    470px 36px,
+    510px 0px,
+    545px 42px,
+    580px 15px,
+    620px 33px,
+    660px 5px,
+    700px 45px,
+    740px 12px,
+    780px 38px,
+    820px 0px,
+    860px 44px,
+    900px 18px,
+    940px 36px,
+    980px 3px,
+    1020px 49px,
+    1060px 10px,
+    1100px 37px,
+    1140px 0px,
+    1180px 42px,
+    1220px 14px,
+    1260px 35px,
+    1300px 6px,
+    1340px 46px,
+    1380px 11px,
+    1420px 39px,
+    1460px 0px,
+    1500px 43px,
+    1540px 16px,
+    1580px 34px,
+    1620px 4px,
+    1660px 47px,
+    1700px 13px,
+    1740px 38px,
+    1780px 0px,
+    1820px 45px,
+    1860px 19px,
+    1900px 36px,
+    1940px 7px,
+    1980px 41px,
+    2000px 15px,
+    2000px 100%,
+    0px 100%
   );
 }
-
 /* طبقة التعتيم لضمان وضوح النص فوق صورة العشب */
 .main-footer::before {
   content: "";

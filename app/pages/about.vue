@@ -6,8 +6,9 @@
         <div class="hero-content animate-on-scroll">
           <h1 class="hero-title">من نحن</h1>
           <p class="hero-subtitle">
-            في <span class="highlight">الندى</span>، نحول النفايات العضوية إلى
-            ذهب أخضر لنزرع مستقبلاً أكثر استدامة.
+            نحن في <span class="highlight">الندى</span> نصنع الفرق في كل فدان.
+            بخبرة عملية ومنتجات عضوية موثوقة، نساعدك على تحسين التربة وزيادة
+            الإنتاج لتحقيق أعلى عائد من أرضك.
           </p>
           <NuxtLink to="/products" class="btn-primary hero-btn">
             اكتشف منتجاتنا

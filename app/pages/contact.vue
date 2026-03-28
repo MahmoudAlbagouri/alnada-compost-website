@@ -5,7 +5,8 @@
       <div class="container hero-content animate-on-scroll">
         <h1 class="hero-title">تواصل معنا</h1>
         <p class="hero-subtitle">
-          نحن هنا للإجابة على استفساراتك ومساعدتك في اختيار الحل الأنسب لمزرعتك.
+          خبرتنا بين إيديك لنتائج أفضل. فريق الندى جاهز للرد على استفساراتك
+          وتقديم الحلول المناسبة لتحقيق أعلى إنتاجية.
         </p>
       </div>
       <div class="wave-bottom">

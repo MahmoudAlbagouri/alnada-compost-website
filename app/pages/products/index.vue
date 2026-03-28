@@ -31,74 +31,6 @@
 
     <!-- Main Content -->
     <section class="products-container container">
-      <!-- <button
-        class="mobile-filter-toggle"
-        @click="isFilterOpen = true"
-        :class="{ 'has-active': hasActiveFilters }"
-      >
-        <Filter :size="18" /><span>تصفية المنتجات</span
-        ><span v-if="activeCategory !== 'all'" class="active-dot"></span>
-      </button> -->
-
-      <!-- <aside class="filters-section animate-on-scroll desktop-only">
-        <div class="filter-header">
-          <h3>تصفح حسب الفئة</h3>
-          <button
-            class="clear-filter"
-            @click="resetFilters"
-            v-if="hasActiveFilters"
-          >
-            مسح الكل
-          </button>
-        </div>
-        <div class="filter-group">
-          <h4 class="filter-group-title">الفئات</h4>
-          <ul class="filter-list">
-            <li
-              v-for="cat in categories"
-              :key="cat.id"
-              @click="
-                activeCategory = cat.id;
-                currentPage = 1;
-              "
-              :class="{ active: activeCategory === cat.id }"
-            >
-              <span>{{ cat.name }}</span
-              ><span class="count">{{ cat.count }}</span>
-            </li>
-          </ul>
-        </div>
-        <div class="filter-group">
-          <h4 class="filter-group-title">الترتيب حسب</h4>
-          <select
-            v-model="activeSort"
-            @change="currentPage = 1"
-            class="sort-select"
-          >
-            <option value="default">الأكثر ظهوراً</option>
-            <option value="price-asc">السعر: من الأقل للأعلى</option>
-            <option value="price-desc">السعر: من الأعلى للأقل</option>
-            <option value="name-asc">الاسم: أ-ي</option>
-            <option value="newest">الأحدث</option>
-          </select>
-        </div>
-        <div class="filter-group">
-          <h4 class="filter-group-title">كلمات مفتاحية</h4>
-          <div class="tags-list">
-            <span
-              v-for="tag in popularTags"
-              :key="tag"
-              class="tag-item"
-              @click="
-                searchQuery = tag;
-                currentPage = 1;
-              "
-              >{{ tag }}</span
-            >
-          </div>
-        </div>
-      </aside> -->
-
       <main class="products-grid-wrapper">
         <div class="results-info animate-on-scroll">
           <span>عرض {{ filteredProducts.length }} منتج</span>
@@ -125,26 +57,26 @@
           class="empty-state animate-on-scroll"
         >
           <div class="empty-icon">🌱</div>
-          <h3>لا توجد منتجات</h3>
-          <p>جرب تغيير كلمات البحث أو اختيار تصنيف آخر</p>
+          <h3>لا توجد منتجات مطابقة</h3>
+          <p>جرب تغيير كلمات البحث أو إعادة تعيين الفلاتر</p>
           <button class="btn-reset" @click="resetFilters">
-            إعادة تعيين الفلتر
+            إعادة تعيين البحث
           </button>
         </div>
 
         <div v-else class="products-grid" :class="viewMode">
           <ProductCard
             v-for="(product, index) in paginatedProducts"
-            :key="product.id"
-            :image="product.image"
+            :key="product.slug"
+            :image="product.images?.[0] || '/images/placeholder.png'"
             :title="product.title"
             :category="product.categoryName"
             :excerpt="product.excerpt"
             :price="product.price"
             :old-price="product.oldPrice"
             :badge="product.badge"
-            :badge-type="product.badgeType"
-            :features="product.features"
+            :badge-type="product.discount ? 'sale' : 'new'"
+            :features="product.features || []"
             :link="`/products/${product.slug}`"
             class="animate-on-scroll"
             :style="{ '--delay': (index % 3) * 0.1 + 's' }"
@@ -283,11 +215,9 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, watch } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
 import {
   Search,
-  Filter,
-  X,
   Grid,
   List,
   Award,
@@ -297,181 +227,66 @@ import {
 } from "lucide-vue-next";
 import ProductCard from "@/components/ProductCard.vue";
 
+// 1. استيراد الكائن من ملف البيانات
+import { allProducts as productsRawData } from "@/pages/products/data/products";
+
+// 2. تحويل الـ Object إلى Array لسهولة الفلترة والـ v-for
+const allProductsArray = computed(() => {
+  if (!productsRawData) return [];
+  return Object.keys(productsRawData).map((key) => ({
+    slug: key,
+    ...productsRawData[key],
+  }));
+});
+
 const searchQuery = ref("");
 const activeCategory = ref("all");
 const activeSort = ref("default");
 const currentPage = ref(1);
 const productsPerPage = 6;
 const loading = ref(false);
-const isFilterOpen = ref(false);
 const viewMode = ref("grid");
 
-watch(isFilterOpen, (newVal) => {
-  document.body.style.overflow = newVal ? "hidden" : "";
-});
-
-const hasActiveFilters = computed(
-  () =>
-    activeCategory.value !== "all" ||
-    searchQuery.value ||
-    activeSort.value !== "default",
-);
-
-const categories = [
-  { id: "all", name: "جميع المنتجات", count: 8 },
-  { id: "compost", name: "الكمبوست", count: 3 },
-  { id: "fertilizer", name: "الأسمدة", count: 2 },
-  { id: "soil", name: "محسنات التربة", count: 2 },
-  { id: "tools", name: "أدوات زراعية", count: 1 },
-];
-const popularTags = ["عضوي", "طبيعي", "تربة", "زراعة", "نباتات"];
-
-const allProducts = [
-  {
-    id: 1,
-    title: "كمبوست بودر ممتاز",
-    excerpt: "سماد عضوي بودر غني بالمغذيات",
-    image: "/images/products/product5.png",
-    slug: "compost-powder",
-    category: "compost",
-    categoryName: "الكمبوست",
-    price: "150 ج.م",
-    oldPrice: "180 ج.م",
-    badge: "الأكثر مبيعاً",
-    badgeType: "bestseller",
-    features: ["100% عضوي", "غني بالمغذيات", "سهل الاستخدام"],
-  },
-  {
-    id: 2,
-    title: "كمبوست سائل مركز",
-    excerpt: "مستخلص سائل من الكمبوست للامتصاص السريع",
-    image: "/images/products/product6.png",
-    slug: "compost-liquid",
-    category: "compost",
-    categoryName: "الكمبوست",
-    price: "200 ج.م",
-    badge: "جديد",
-    badgeType: "new",
-    features: ["امتصاص فوري", "للري والرش", "تركيز عالي"],
-  },
-  {
-    id: 3,
-    title: "جبس زراعي نقي",
-    excerpt: "جبس طبيعي عالي النقاء لمعالجة ملوحة التربة",
-    image: "/images/products/product4.png",
-    slug: "agricultural-gypsum",
-    category: "soil",
-    categoryName: "محسنات التربة",
-    price: "120 ج.م",
-    features: ["نقاوة عالية", "لمعالجة الملوحة", "يحسن التهوية"],
-  },
-  {
-    id: 4,
-    title: "سماد عضوي متكامل",
-    excerpt: "تركيبة متوازنة من العناصر الغذائية الأساسية",
-    image: "/images/products/product4.png",
-    slug: "complete-organic-fertilizer",
-    category: "fertilizer",
-    categoryName: "الأسمدة",
-    price: "175 ج.م",
-    oldPrice: "200 ج.م",
-    badge: "خصم 15%",
-    badgeType: "sale",
-    features: ["تركيبة متكاملة", "نمو أسرع", "آمن تماماً"],
-  },
-  {
-    id: 5,
-    title: "محفز نمو طبيعي",
-    excerpt: "منشط حيوي يعزز نمو الجذور",
-    image: "/images/products/growth-stimulator.jpg",
-    slug: "natural-growth-stimulator",
-    category: "fertilizer",
-    categoryName: "الأسمدة",
-    price: "250 ج.م",
-    features: ["يعزز النمو", "مقاومة الإجهاد", "طبيعي 100%"],
-  },
-  {
-    id: 6,
-    title: "محسن تربة رملي",
-    excerpt: "خليط خاص لتحسين بنية التربة الرملية",
-    image: "/images/products/sandy-soil-improver.jpg",
-    slug: "sandy-soil-improver",
-    category: "soil",
-    categoryName: "محسنات التربة",
-    price: "140 ج.م",
-    features: ["للتربة الرملية", "يحفظ الرطوبة", "يحسن البنية"],
-  },
-  {
-    id: 7,
-    title: "كمبوست دودي",
-    excerpt: "أعلى جودة من الكمبوست المنتج بواسطة دود الأرض",
-    image: "/images/products/vermicompost.jpg",
-    slug: "vermicompost",
-    category: "compost",
-    categoryName: "الكمبوست",
-    price: "220 ج.م",
-    badge: "ممتاز",
-    badgeType: "bestseller",
-    features: ["أعلى جودة", "غني جداً", "ميكروبات نافعة"],
-  },
-  {
-    id: 8,
-    title: "طقم أدوات زراعية",
-    excerpt: "مجموعة أدوات أساسية للعناية بالنباتات",
-    image: "/images/products/garden-tools.jpg",
-    slug: "garden-tools-set",
-    category: "tools",
-    categoryName: "أدوات زراعية",
-    price: "350 ج.م",
-    oldPrice: "400 ج.م",
-    badge: "طقم",
-    badgeType: "sale",
-    features: ["8 قطع", "جودة عالية", "مقبض مريح"],
-  },
-];
 useHead({
-  title: "  المنتجات | شركة الندى",
+  title: "المنتجات | شركة الندى",
   meta: [
-    { name: "description", content: "احصل على أفضل أسعار الأسمدة والكمبوست" },
+    { name: "description", content: "اكتشف منتجات شركة الندى للأسمدة العضوية" },
   ],
 });
 
+// 3. منطق الفلترة والبحث
 const filteredProducts = computed(() => {
-  let result = [...allProducts];
-  if (activeCategory.value !== "all")
-    result = result.filter((p) => p.category === activeCategory.value);
+  let result = [...allProductsArray.value];
+
+  // فلترة بالبحث
   if (searchQuery.value.trim()) {
     const q = searchQuery.value.toLowerCase();
     result = result.filter(
       (p) =>
         p.title.toLowerCase().includes(q) ||
-        p.excerpt.toLowerCase().includes(q) ||
-        p.categoryName.toLowerCase().includes(q),
+        p.excerpt.toLowerCase().includes(q),
     );
   }
-  switch (activeSort.value) {
-    case "price-asc":
-      result.sort((a, b) => parseInt(a.price) - parseInt(b.price));
-      break;
-    case "price-desc":
-      result.sort((a, b) => parseInt(b.price) - parseInt(a.price));
-      break;
-    case "name-asc":
-      result.sort((a, b) => a.title.localeCompare(b.title, "ar"));
-      break;
-    case "name-desc":
-      result.sort((a, b) => b.title.localeCompare(a.title, "ar"));
-      break;
-    case "newest":
-      result.sort((a, b) => b.id - a.id);
-      break;
+
+  // فلترة بالتصنيف (إذا كان موجوداً في الـ Raw Data)
+  if (activeCategory.value !== "all") {
+    result = result.filter((p) => p.category === activeCategory.value);
   }
+
+  // الترتيب حسب السعر (تحويل النص "150 ج.م" إلى رقم)
+  if (activeSort.value === "price-asc") {
+    result.sort((a, b) => parseInt(a.price) - parseInt(b.price));
+  } else if (activeSort.value === "price-desc") {
+    result.sort((a, b) => parseInt(b.price) - parseInt(a.price));
+  }
+
   return result;
 });
 
 const paginatedProducts = computed(() =>
   filteredProducts.value.slice(0, currentPage.value * productsPerPage),
 );
+
 const totalPages = computed(() =>
   Math.ceil(filteredProducts.value.length / productsPerPage),
 );
@@ -485,14 +300,14 @@ const loadMore = () => {
     }, 600);
   }
 };
+
 const resetFilters = () => {
-  activeCategory.value = "all";
   searchQuery.value = "";
-  activeSort.value = "default";
+  activeCategory.value = "all";
   currentPage.value = 1;
-  isFilterOpen.value = false;
 };
 
+// Animation Logic
 let observer;
 const initObserver = () => {
   observer = new IntersectionObserver(
@@ -506,14 +321,13 @@ const initObserver = () => {
     },
     { threshold: 0.1 },
   );
-  setTimeout(
-    () =>
-      document
-        .querySelectorAll(".animate-on-scroll")
-        .forEach((el) => observer.observe(el)),
-    100,
-  );
+  setTimeout(() => {
+    document
+      .querySelectorAll(".animate-on-scroll")
+      .forEach((el) => observer.observe(el));
+  }, 200);
 };
+
 onMounted(() => initObserver());
 onUnmounted(() => {
   if (observer) observer.disconnect();
