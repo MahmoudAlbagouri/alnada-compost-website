@@ -42,7 +42,7 @@ import { Facebook, Instagram, MessageCircle } from "lucide-vue-next";
 </script>
 
 <style scoped>
-.main-footer[data-v-a11a4c1f] {
+.main-footer {
   background-image: url(/images/grass1.png);
   background-size: cover;
   background-position: center;
@@ -51,7 +51,6 @@ import { Facebook, Instagram, MessageCircle } from "lucide-vue-next";
   padding: 120px 0 60px 0;
   direction: rtl;
 
-  /* تم تضييق المسافات إلى حوالي 30-40px مع تغيير الارتفاعات عشوائياً بين 0px و 50px */
   clip-path: polygon(
     0px 45px,
     30px 15px,
