@@ -6,8 +6,8 @@
         <h1 class="hero-title">تواصل معنا</h1>
         <p class="hero-subtitle">
           خبرتنا بين إيديك لنتائج أفضل. فريق الندى جاهز للرد على استفساراتك
-          وتقديم الحلول المناسبة لتحقيق أعلى إنتاجية.
-+        </p>
+          وتقديم الحلول المناسبة لتحقيق أعلى إنتاجية. +
+        </p>
       </div>
       <div class="wave-bottom">
         <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
@@ -41,7 +41,7 @@
               <Phone :size="24" />
             </div>
             <h3>اتصل بنا</h3>
-            <a href="tel:+201000000000" class="contact-link"
+            <a href="tel:+201032392542" class="contact-link"
               >+20 100 000 0000</a
             >
             <p class="info-desc">من السبت للخميس، 9 صباحاً - 5 مساءً</p>
@@ -191,7 +191,7 @@
     <section class="map-section container animate-on-scroll">
       <div class="map-wrapper">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.21498202691!2d31.378417359807113!3d30.059371617967418!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583f68b7d35b1f%3A0xea4d01ac0898394e!2zTWRpem9uIC0g2YXYr9iy2YjZhg!5e0!3m2!1sar!2seg!4v1773377729654!5m2!1sar!2seg"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d215.05612385017216!2d31.62087512165825!3d30.41063622079285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f7ff005591cded%3A0x29f9dbc80e43a403!2z2YPZhdio2YjYs9iqINin2YTYtdit2LHYp9ih!5e0!3m2!1sar!2seg!4v1777027946408!5m2!1sar!2seg"
           width="100%"
           height="450"
           style="border: 0"
