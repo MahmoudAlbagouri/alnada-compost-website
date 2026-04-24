@@ -7,7 +7,7 @@
         <p class="hero-subtitle">
           خبرتنا بين إيديك لنتائج أفضل. فريق الندى جاهز للرد على استفساراتك
           وتقديم الحلول المناسبة لتحقيق أعلى إنتاجية.
-        </p>
++        </p>
       </div>
       <div class="wave-bottom">
         <svg viewBox="0 0 1440 320" preserveAspectRatio="none">

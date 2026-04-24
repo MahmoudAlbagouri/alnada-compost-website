@@ -27,7 +27,7 @@
           </div>
           <h3>واتساب مباشر</h3>
           <a
-            href="https://wa.me/201110022133"
+            href="https://wa.me/201032392542"
             class="contact-link"
             target="_blank"
             >+20 111 002 2133</a
@@ -302,7 +302,7 @@ const handleSubmit = async () => {
   isSubmitting.value = true;
 
   try {
-    const whatsappNumber = "201110022133"; // قم بتغيير الرقم هنا
+    const whatsappNumber = "201032392542"; // قم بتغيير الرقم هنا
 
     const productLabels = {
       "compost-powder": "كمبوست بودر",

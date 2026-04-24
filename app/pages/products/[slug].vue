@@ -250,7 +250,7 @@ watch(
 );
 
 const whatsappUrl = computed(() => {
-  const phone = "201110022133";
+  const phone = "201032392542";
   const message = `طلب منتج: ${product.value?.title}%0Aالكمية: ${quantity.value}%0Aالكود: ${product.value?.sku}`;
   return `https://wa.me/${phone}?text=${message}`;
 });
