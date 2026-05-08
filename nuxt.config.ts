@@ -38,7 +38,17 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "nuxt-swiper",
     "@nuxtjs/seo", // الموديل الجديد اللي هيعملك الـ Sitemap والـ Robots تلقائياً
+    "@nuxt/fonts", // أضف هذا السطر هنا
   ],
+  fonts: {
+    families: [
+      {
+        name: "Cairo",
+        weights: [400, 500, 600, 700, 800],
+        subsets: ["arabic"],
+      },
+    ],
+  },
 
   // إعدادات الصور
   image: {

@@ -17,8 +17,7 @@
   --transition-fast: 0.2s ease-in-out;
   --transition-standard: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-/* Extra Light */
-@font-face {
+/* @font-face {
   font-family: "Cairo";
   src: url("../fonts/Cairo-ExtraLight.ttf") format("truetype");
   font-weight: 200;
@@ -26,7 +25,6 @@
   font-display: swap;
 }
 
-/* Light */
 @font-face {
   font-family: "Cairo";
   src: url("../fonts/Cairo-Light.ttf") format("truetype");
@@ -35,7 +33,6 @@
   font-display: swap;
 }
 
-/* Regular */
 @font-face {
   font-family: "Cairo";
   src: url("../fonts/Cairo-Regular.ttf") format("truetype");
@@ -44,7 +41,6 @@
   font-display: swap;
 }
 
-/* Medium */
 @font-face {
   font-family: "Cairo";
   src: url("../fonts/Cairo-Medium.ttf") format("truetype");
@@ -53,7 +49,6 @@
   font-display: swap;
 }
 
-/* SemiBold */
 @font-face {
   font-family: "Cairo";
   src: url("../fonts/Cairo-SemiBold.ttf") format("truetype");
@@ -62,7 +57,6 @@
   font-display: swap;
 }
 
-/* Bold */
 @font-face {
   font-family: "Cairo";
   src: url("../fonts/Cairo-Bold.ttf") format("truetype");
@@ -71,7 +65,6 @@
   font-display: swap;
 }
 
-/* Extra Bold */
 @font-face {
   font-family: "Cairo";
   src: url("../fonts/Cairo-ExtraBold.ttf") format("truetype");
@@ -80,14 +73,13 @@
   font-display: swap;
 }
 
-/* Black */
 @font-face {
   font-family: "Cairo";
   src: url("../fonts/Cairo-Black.ttf") format("truetype");
   font-weight: 900;
   font-style: normal;
   font-display: swap;
-}
+} */
 * {
   box-sizing: border-box;
   font-family: "Cairo", sans-serif;
@@ -101,7 +93,8 @@ html {
 body {
   background-color: var(--bg-light);
   color: var(--black);
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  /* font-family:
+    "Cairo", "Segoe UI", Tahoma, sans-serif; */
   line-height: 1.6;
   direction: rtl; /* ليتناسب مع صور الموقع العربية */
   min-height: 1000px;
