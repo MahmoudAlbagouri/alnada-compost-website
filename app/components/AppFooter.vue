@@ -29,7 +29,12 @@
         <h3>تابعنا</h3>
         <div class="social-icons">
           <a href="#" aria-label="Instagram"><Instagram :size="20" /></a>
-          <a href="#" aria-label="Facebook"><Facebook :size="20" /></a>
+          <a
+            href="https://www.facebook.com/profile.php?id=61570780587941"
+            target="_blank"
+            aria-label="Facebook"
+            ><Facebook :size="20"
+          /></a>
           <a href="#" aria-label="Message"><MessageCircle :size="20" /></a>
         </div>
       </div>

@@ -62,7 +62,10 @@
           <div class="social-box">
             <h4>تابعنا على وسائل التواصل</h4>
             <div class="social-links">
-              <a href="#" class="social-icon" aria-label="Facebook"
+              <a
+                href="https://www.facebook.com/profile.php?id=61570780587941"
+                class="social-icon"
+                aria-label="Facebook"
                 ><Facebook
               /></a>
               <a href="#" class="social-icon" aria-label="Instagram"
