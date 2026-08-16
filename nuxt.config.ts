@@ -15,7 +15,7 @@ export default defineNuxtConfig({
   // إعدادات الموقع والـ SEO العام
   site: {
     url: "https://www.alnadacomp.com",
-    name: "شركة الندى للتنمية الزراعية",
+    name: "شركة الندى للتوريد الاسمدة العضوية",
     description:
       "شركة الندى - رائدة في صناعة الكمبوست والسماد العضوي عالي الجودة في مصر",
     defaultLocale: "ar",
@@ -24,7 +24,7 @@ export default defineNuxtConfig({
   // إعدادات الـ Head
   app: {
     head: {
-      title: "شركة الندى للتنمية الزراعية",
+      title: "شركة الندى للتوريد الاسمدة العضوية",
       htmlAttrs: {
         lang: "ar",
         dir: "rtl",

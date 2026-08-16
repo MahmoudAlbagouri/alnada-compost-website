@@ -9,7 +9,7 @@
 <script setup>
 // ✅ تعريف الـ SEO الأساسي على مستوى التطبيق كله
 useSeoMeta({
-  ogSiteName: "شركة الندى للتنمية الزراعية",
+  ogSiteName: "شركة الندى للتوريد الاسمدة العضوية",
   ogLocale: "ar_EG",
   twitterCard: "summary_large_image",
 });

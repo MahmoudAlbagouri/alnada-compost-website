@@ -42,7 +42,7 @@
           <!-- ✅ تحسين: تحديد الأبعاد + loading="eager" لأن اللوجو فوق الـ fold -->
           <NuxtImg
             src="/images/logo.png"
-            alt="شركة الندى للتنمية الزراعية"
+            alt="شركة الندى للتوريد الاسمدة العضوية"
             width="150"
             height="50"
             loading="eager"
