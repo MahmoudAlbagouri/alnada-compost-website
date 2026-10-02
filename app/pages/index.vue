@@ -1,6 +1,40 @@
 <template>
   <div class="home-page-wrapper">
     <!-- =======================
+         زر المواصفة القياسية الثابت (FAB)
+         ======================= -->
+    <a
+      href="https://eos.org.eg/users_purchased_files/20054_8503.pdf"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="floating-spec-btn"
+      title="تحميل المواصفة القياسية للأسمدة الكمبوست"
+    >
+      <span class="btn-icon">
+        <!-- أيقونة ملف PDF -->
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path
+            d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+          ></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+      </span>
+      <span class="btn-text">المواصفة القياسية</span>
+    </a>
+
+    <!-- =======================
          1. Hero Section
          ======================= -->
     <div class="hero-wrapper" @mousemove="handleGlobalParallax">
@@ -45,7 +79,7 @@
 
             <div class="hero-stats animate-in" style="--delay: 0.9s">
               <div class="stat-item">
-                <strong>+١٠</strong><span>سنوات خبرة</span>
+                <strong>+١</strong><span>سنوات خبرة</span>
               </div>
               <div class="stat-divider"></div>
               <div class="stat-item">
@@ -136,7 +170,6 @@
 
     <!-- =======================
          2. Static Marketing Banner Slider
-         (تم إضافة كلاس scroll-reveal)
          ======================= -->
     <section class="banners-section scroll-reveal">
       <div class="container banners-container">
@@ -192,7 +225,6 @@
 
     <!-- =======================
          3. Events & Conferences Slider
-         (تم إضافة كلاس scroll-reveal)
          ======================= -->
     <section class="events-section scroll-reveal">
       <div class="container events-container">
@@ -320,7 +352,6 @@
 
     <!-- =======================
          4. Blog / News Section
-         (تم إضافة كلاس scroll-reveal وتصحيح الرابط)
          ======================= -->
     <section class="blog-section scroll-reveal">
       <div class="container blog-container">
@@ -369,9 +400,9 @@
         </div>
       </div>
     </section>
+
     <!-- =======================
          5. Cinematic Video Section
-         (تم إصلاح مشكلة Hydration وإضافة scroll-reveal)
          ======================= -->
     <section class="video-section scroll-reveal">
       <div class="container video-container">
@@ -421,8 +452,10 @@ import "swiper/css/autoplay";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
+
 const iframeAllow =
   "accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture";
+
 // --- بيانات الصور ---
 const bannerImages = [
   "/images/slider2.png",
@@ -434,12 +467,14 @@ const bannerImages = [
   "/images/slider8.png",
   "/images/slider9.png",
 ];
+
 useHead({
   title: "  الرئيسية | شركة الندى",
   meta: [
     { name: "description", content: "احصل على أفضل أسعار الأسمدة والكمبوست" },
   ],
 });
+
 // --- Hero Logic ---
 const isLoaded = ref(false);
 const swiperInstance = ref(null);
@@ -487,14 +522,14 @@ onMounted(() => {
   const observerOptions = {
     root: null,
     rootMargin: "0px",
-    threshold: 0.15, // يبدأ التأثير عندما يظهر 15% من العنصر
+    threshold: 0.15,
   };
 
   const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add("visible");
-        observer.unobserve(entry.target); // إيقاف المراقبة بعد الظهور مرة واحدة
+        observer.unobserve(entry.target);
       }
     });
   }, observerOptions);
@@ -569,6 +604,7 @@ const forcePlay = () => {
   direction: rtl;
   background-color: var(--bg-light);
   overflow-x: hidden;
+  position: relative; /* مهم للزر العائم */
 }
 
 .container {
@@ -576,6 +612,73 @@ const forcePlay = () => {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 24px;
+}
+
+/* =======================
+   FLOATING SPEC BUTTON STYLES
+   ======================= */
+.floating-spec-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px; /* في اليمين لأن الموقع RTL */
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--primary);
+  color: white;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 50px;
+  box-shadow: 0 8px 25px rgba(33, 52, 40, 0.4);
+  transition: all 0.3s var(--ease-out);
+  border: 2px solid transparent;
+  overflow: hidden;
+}
+
+.floating-spec-btn:hover {
+  background: var(--accent);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(78, 124, 50, 0.5);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.15);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.floating-spec-btn:hover .btn-icon {
+  background: rgba(255, 255, 255, 0.25);
+  transform: rotate(10deg);
+}
+
+.btn-text {
+  font-weight: 700;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+/* تحسينات للشاشات الصغيرة للزر العائم */
+@media (max-width: 768px) {
+  .floating-spec-btn {
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 18px;
+  }
+  .btn-text {
+    font-size: 0.85rem;
+  }
+  .btn-icon {
+    width: 32px;
+    height: 32px;
+  }
 }
 
 /* =======================
